@@ -367,65 +367,140 @@ function debounce(func, wait) {
 }
 
 // Handle form submission
-document.addEventListener('DOMContentLoaded', function() {
+// Email generator handler for "Open in Mail App" and "Copy Message"
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('submission-form');
-    if (form) {
-        // Generate filename on form field changes
-        const titleInput = document.getElementById('paper-title');
-        const authorInput = document.getElementById('author-name');
-        const filenamePreview = document.getElementById('filename-preview');
-        const filenameText = document.getElementById('filename-text');
-        const suggestedFilename = document.getElementById('suggested-filename');
-        
-        function updateFilename() {
-            const title = titleInput.value.trim();
-            const authors = authorInput.value.trim();
-            
-            if (title && authors) {
-                const now = new Date();
-                const year = now.getFullYear();
-                const month = String(now.getMonth() + 1).padStart(2, '0');
-                
-                // Get first author's last name
-                const firstAuthor = authors.split(',')[0].trim();
-                const authorParts = firstAuthor.split(' ');
-                const lastName = authorParts[authorParts.length - 1].toLowerCase()
-                    .replace(/[^a-z0-9]/g, '');
-                
-                // Get first 2-3 words from title
-                const titleWords = title.toLowerCase()
-                    .replace(/[^a-z0-9\s]/g, '')
-                    .split(' ')
-                    .filter(word => word.length > 2)
-                    .slice(0, 3)
-                    .join('-');
-                
-                const filename = `${year}-${month}-${lastName}-${titleWords}.pdf`;
-                
-                filenameText.textContent = filename;
-                suggestedFilename.value = filename;
-                filenamePreview.style.display = 'block';
-            } else {
-                filenamePreview.style.display = 'none';
-                suggestedFilename.value = '';
-            }
-        }
-        
-        titleInput.addEventListener('input', updateFilename);
-        authorInput.addEventListener('input', updateFilename);
-        
-        form.addEventListener('submit', function(e) {
-            // Add loading state
-            const submitBtn = form.querySelector('.submit-btn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-            submitBtn.disabled = true;
-            
-            // Re-enable after 3 seconds (form will redirect/reload)
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 3000);
-        });
+    if (!form) return;
+
+    const titleInput = document.getElementById('paper-title');
+    const authorInput = document.getElementById('author-name');
+    const emailInput = document.getElementById('author-email');
+    const infoInput = document.getElementById('additional-info');
+    const openMailBtn = document.getElementById('open-mail-btn');
+    const copyBtn = document.getElementById('copy-message-btn');
+    const feedback = document.getElementById('feedback');
+
+    // Replace this with your real editorial inbox
+    const RECIPIENT_EMAIL = 'submissions@yourdomain.com';
+
+    function parseAuthors(raw) {
+        if (!raw) return [];
+        // Split by commas, " and ", "&" — conservative splitting
+        const parts = raw.split(/,| and | & /i).map(s => s.trim()).filter(Boolean);
+        return parts;
     }
+
+    function authorPhrase(authorsArr) {
+        if (authorsArr.length === 0) return { who: 'An author', subjectPronoun: 'My', greeting: 'Hello,' };
+        if (authorsArr.length === 1) {
+            return { who: authorsArr[0], subjectPronoun: 'my', greeting: `Hello, I am ${authorsArr[0]}.` };
+        }
+        // multiple authors
+        const names = authorsArr.join(', ');
+        return { who: names, subjectPronoun: 'our', greeting: `Hello, we are ${names}.` };
+    }
+
+    function buildMessage() {
+        const authorsRaw = authorInput.value.trim();
+        const authorsArr = parseAuthors(authorsRaw);
+        const title = titleInput.value.trim() || '[Untitled]';
+        const contactEmail = emailInput.value.trim() || '';
+        const extra = infoInput.value.trim();
+
+        const ap = authorPhrase(authorsArr);
+        // Use 'my' vs 'our'
+        const possessive = (authorsArr.length <= 1) ? 'my' : 'our';
+        const verb = (authorsArr.length <= 1) ? 'is' : 'is';
+
+        // Construct message body
+        let body = `${ap.greeting}\n\n`;
+        body += `The title of ${possessive} paper ${verb} "${title}".\n\n`;
+
+        if (extra) {
+            body += `Additional message:\n${extra}\n\n`;
+        }
+
+        body += `Best regards,\n${ap.who}\nContact: ${contactEmail}\n`;
+
+        return {
+            subject: `Submission: ${title}`,
+            body
+        };
+    }
+
+    function openMailClient() {
+        const { subject, body } = buildMessage();
+        // Build mailto link (mailto:recipient?subject=...&body=...)
+        // Some mail clients ignore very long mailto bodies, but for simple text it's fine
+        const mailto = `mailto:${encodeURIComponent(RECIPIENT_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        // Use location.href to open the user's default mail app / client
+        window.location.href = mailto;
+    }
+
+    async function copyToClipboard() {
+        const { subject, body } = buildMessage();
+        // Full message includes subject line for convenience
+        const full = `Subject: ${subject}\n\n${body}`;
+        try {
+            await navigator.clipboard.writeText(full);
+            feedback.style.display = 'block';
+            feedback.textContent = 'Message copied to clipboard. Paste it into your mail app and send.';
+            setTimeout(() => { feedback.style.display = 'none'; }, 5000);
+        } catch (err) {
+            // Fallback: highlight text area with the composed message (create temporary)
+            const ta = document.createElement('textarea');
+            ta.value = full;
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+                document.execCommand('copy');
+                feedback.style.display = 'block';
+                feedback.textContent = 'Message copied to clipboard (fallback).';
+                setTimeout(() => { feedback.style.display = 'none'; }, 5000);
+            } catch (e2) {
+                feedback.style.display = 'block';
+                feedback.textContent = 'Could not copy automatically. Please select and copy the message manually.';
+                setTimeout(() => { feedback.style.display = 'none'; }, 5000);
+            }
+            document.body.removeChild(ta);
+        }
+    }
+
+    // Open mail button click
+    openMailBtn.addEventListener('click', function (e) {
+        // Validate required fields
+        if (!authorInput.value.trim()) {
+            feedback.style.display = 'block';
+            feedback.textContent = 'Please enter author name(s).';
+            return;
+        }
+        if (!emailInput.value.trim()) {
+            feedback.style.display = 'block';
+            feedback.textContent = 'Please enter a contact email.';
+            return;
+        }
+        if (!titleInput.value.trim()) {
+            feedback.style.display = 'block';
+            feedback.textContent = 'Please enter the paper title.';
+            return;
+        }
+        openMailClient();
+    });
+
+    // Copy message button click
+    copyBtn.addEventListener('click', function (e) {
+        if (!authorInput.value.trim() || !emailInput.value.trim() || !titleInput.value.trim()) {
+            feedback.style.display = 'block';
+            feedback.textContent = 'Please fill in authors, contact email, and paper title before copying.';
+            setTimeout(() => { feedback.style.display = 'none'; }, 4000);
+            return;
+        }
+        copyToClipboard();
+    });
+
+    // Optional: let Enter submit open-mail behavior for quick keyboard users
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        openMailBtn.click();
+    });
 });

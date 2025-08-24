@@ -600,3 +600,21 @@ footer a:hover {
         justify-content: center;
     }
 }
+
+/* Email generator tweaks */
+.form-actions .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.reset-btn {
+    background: var(--text-muted);
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    border: none;
+}
+#feedback {
+    font-weight: 600;
+}

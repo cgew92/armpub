@@ -100,72 +100,45 @@
                     </ul>
                 </div>
 
-                <form id="submission-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
-                    <!-- Hidden field for suggested filename -->
-                    <input type="hidden" id="suggested-filename" name="suggested_filename" value="">
-                    <div class="form-group">
-                        <label for="author-name">Author Name(s) *</label>
-                        <input type="text" id="author-name" name="authors" required placeholder="John Doe, Jane Smith">
-                    </div>
+                <!-- Contact / Email Generator Form (replace previous submission form) -->
+            <form id="submission-form" autocomplete="on">
+                <div class="form-group">
+                    <label for="author-name">Author Name(s) *</label>
+                    <input type="text" id="author-name" name="authors" required placeholder="John Doe, Jane Smith">
+                </div>
 
-                    <div class="form-group">
-                        <label for="author-email">Contact Email *</label>
-                        <input type="email" id="author-email" name="email" required placeholder="john.doe@university.edu">
-                    </div>
+                <div class="form-group">
+                    <label for="author-email">Contact Email *</label>
+                    <input type="email" id="author-email" name="email" required placeholder="john.doe@university.edu">
+                </div>
 
-                    <div class="form-group">
-                        <label for="paper-title">Paper Title *</label>
-                        <input type="text" id="paper-title" name="title" required placeholder="Your Research Paper Title">
-                    </div>
+                <div class="form-group">
+                    <label for="paper-title">Paper Title *</label>
+                    <input type="text" id="paper-title" name="title" required placeholder="Your Research Paper Title">
+                </div>
 
-                    <div class="form-group">
-                        <label for="abstract">Abstract *</label>
-                        <textarea id="abstract" name="abstract" required rows="6" placeholder="Provide a comprehensive abstract (150-300 words) describing your research, methodology, findings, and conclusions..."></textarea>
-                        <div class="char-count">
-                            <span id="abstract-count">0</span>/300 words (recommended)
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="additional-info">Optional message to include</label>
+                    <textarea id="additional-info" name="additional_info" rows="4" placeholder="Any short message you want included in the email (optional)..."></textarea>
+                </div>
 
-                    <div class="form-group">
-                        <label for="keywords">Keywords</label>
-                        <input type="text" id="keywords" name="keywords" placeholder="machine learning, neural networks, AI (comma-separated)">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="research-field">Research Field</label>
-                        <select id="research-field" name="field">
-                            <option value="">Select a field</option>
-                            <option value="computer-science">Computer Science</option>
-                            <option value="mathematics">Mathematics</option>
-                            <option value="physics">Physics</option>
-                            <option value="biology">Biology</option>
-                            <option value="chemistry">Chemistry</option>
-                            <option value="engineering">Engineering</option>
-                            <option value="medicine">Medicine</option>
-                            <option value="social-sciences">Social Sciences</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="paper-pdf">Paper PDF *</label>
-                        <input type="file" id="paper-pdf" name="pdf" required accept=".pdf">
-                        <small>Maximum file size: 25MB</small>
-                        <div id="filename-preview" class="filename-preview" style="display: none;">
-                            <strong>Suggested filename:</strong> <span id="filename-text"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="additional-info">Additional Information</label>
-                        <textarea id="additional-info" name="additional_info" rows="3" placeholder="Any additional information about your submission..."></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn">
-                        <i class="fas fa-paper-plane"></i>
-                        Submit Paper
+                <div class="form-actions" style="display:flex;flex-direction:column;gap:0.75rem;align-items:flex-start;">
+                    <!-- IMPORTANT: replace submissions@example.com with the real recipient email (editorial inbox) -->
+                    <button id="open-mail-btn" type="button" class="submit-btn">
+                        <i class="fas fa-envelope-open-text"></i> Open in Mail App
                     </button>
-                </form>
+
+                    <button id="copy-message-btn" type="button" class="reset-btn" style="display:inline-flex;align-items:center;gap:0.5rem;">
+                        <i class="fas fa-copy"></i> Copy Message to Clipboard
+                    </button>
+
+                    <div style="font-size:0.9rem;color:var(--text-muted);margin-top:0.25rem;">
+                        <strong>Reminder:</strong> No edits are needed in the final email.
+                    </div>
+
+                    <div id="feedback" aria-live="polite" style="margin-top:0.5rem;color:var(--primary-color);display:none;"></div>
+                </div>
+            </form>
             </div>
         </section>
 
