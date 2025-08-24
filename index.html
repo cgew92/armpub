@@ -101,6 +101,8 @@
                 </div>
 
                 <form id="submission-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+                    <!-- Hidden field for suggested filename -->
+                    <input type="hidden" id="suggested-filename" name="suggested_filename" value="">
                     <div class="form-group">
                         <label for="author-name">Author Name(s) *</label>
                         <input type="text" id="author-name" name="authors" required placeholder="John Doe, Jane Smith">
@@ -149,6 +151,9 @@
                         <label for="paper-pdf">Paper PDF *</label>
                         <input type="file" id="paper-pdf" name="pdf" required accept=".pdf">
                         <small>Maximum file size: 25MB</small>
+                        <div id="filename-preview" class="filename-preview" style="display: none;">
+                            <strong>Suggested filename:</strong> <span id="filename-text"></span>
+                        </div>
                     </div>
 
                     <div class="form-group">

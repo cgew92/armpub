@@ -370,6 +370,50 @@ function debounce(func, wait) {
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('submission-form');
     if (form) {
+        // Generate filename on form field changes
+        const titleInput = document.getElementById('paper-title');
+        const authorInput = document.getElementById('author-name');
+        const filenamePreview = document.getElementById('filename-preview');
+        const filenameText = document.getElementById('filename-text');
+        const suggestedFilename = document.getElementById('suggested-filename');
+        
+        function updateFilename() {
+            const title = titleInput.value.trim();
+            const authors = authorInput.value.trim();
+            
+            if (title && authors) {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                
+                // Get first author's last name
+                const firstAuthor = authors.split(',')[0].trim();
+                const authorParts = firstAuthor.split(' ');
+                const lastName = authorParts[authorParts.length - 1].toLowerCase()
+                    .replace(/[^a-z0-9]/g, '');
+                
+                // Get first 2-3 words from title
+                const titleWords = title.toLowerCase()
+                    .replace(/[^a-z0-9\s]/g, '')
+                    .split(' ')
+                    .filter(word => word.length > 2)
+                    .slice(0, 3)
+                    .join('-');
+                
+                const filename = `${year}-${month}-${lastName}-${titleWords}.pdf`;
+                
+                filenameText.textContent = filename;
+                suggestedFilename.value = filename;
+                filenamePreview.style.display = 'block';
+            } else {
+                filenamePreview.style.display = 'none';
+                suggestedFilename.value = '';
+            }
+        }
+        
+        titleInput.addEventListener('input', updateFilename);
+        authorInput.addEventListener('input', updateFilename);
+        
         form.addEventListener('submit', function(e) {
             // Add loading state
             const submitBtn = form.querySelector('.submit-btn');
