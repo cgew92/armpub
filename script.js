@@ -217,43 +217,45 @@ function createPaperCard(paper) {
 
 // Toggle abstract expansion - Use data attributes for precise targeting
 function toggleAbstract(e) {
-
-    console.log("toggled");
-
     e.preventDefault();
     e.stopPropagation();
     
     const button = e.target;
     const cardId = button.getAttribute('data-card-id');
-    console.log(e.target);
-    console.log(cardId);
     
-    if (!cardId) {
-        console.error('No card ID found on button');
-        return;
-    }
+    console.log('Button clicked:', button);
+    console.log('Card ID:', cardId);
     
-    // Use the card ID to find the specific elements, avoiding any closest() issues
+    // Also try the closest method to see what it finds
+    const cardViaClosest = button.closest('.paper-card');
+    console.log('Card via closest:', cardViaClosest);
+    console.log('Card ID via closest:', cardViaClosest?.getAttribute('data-id'));
+    
+    // Use the card ID to find the specific elements
     const preview = document.querySelector(`.abstract-preview[data-card-id="${cardId}"]`);
     const full = document.querySelector(`.abstract-full[data-card-id="${cardId}"]`);
     
+    console.log('Preview element:', preview);
+    console.log('Full element:', full);
+    
     if (!preview || !full) {
-        console.error('Could not find preview or full abstract elements for card:', cardId);
+        console.error('Could not find elements for card:', cardId);
         return;
     }
     
     const isCurrentlyExpanded = full.style.display === 'block';
+    console.log('Currently expanded:', isCurrentlyExpanded);
     
     if (isCurrentlyExpanded) {
-        // Collapse
         full.style.display = 'none';
         preview.style.display = 'block';
         button.textContent = 'Read full abstract';
+        console.log('Collapsed card:', cardId);
     } else {
-        // Expand  
         full.style.display = 'block';
         preview.style.display = 'none';
         button.textContent = 'Show less';
+        console.log('Expanded card:', cardId);
     }
 }
 
