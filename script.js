@@ -279,7 +279,7 @@ function sortPapers() {
             const dateB = new Date(b.date_modified);
             if (isNaN(dateA)) return 1;
             if (isNaN(dateB)) return -1;
-            const diff = b._timestamp - a._timestamp;
+            const diff = a._timestamp - b._timestamp;
             return diff !== 0 ? diff : a._initialIndex - b._initialIndex;
         }
         case 'title-asc': {
