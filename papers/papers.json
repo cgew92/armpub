@@ -1,13 +1,49 @@
 {
   "papers": [
     {
-      "id": "unique-id",
-      "title": "Paper Title",
-      "authors": ["Author One", "Author Two"],
-      "abstract": "Abstract text here...",
-      "keywords": ["keyword1", "keyword2"],
-      "date_modified": "2025-08-24",
-      "pdf_url": "https://arxiv.org/pdf/1706.03762"
+      "id": "2508.15744",
+      "title": "Regularized Perturbation Theory for Ab initio Solids",
+      "authors": ["Meng-Fu Chen", "Jinghong Zhang", "Hieu Q. Dinh", "Adam Rettig", "Joonho Lee"],
+      "abstract": "Second-order Moller-Plesset perturbation theory (MP2) for ab initio simulations of solids is often limited by divergence or over-correlation issues, particularly in metallic, narrow-gap, and dispersion-stabilized systems. We develop and assess three regularized second-order perturbation theories: κ-MP2, σ-MP2, and the size-consistent Brillouin-Wigner approach (BW-s2), across metals, semiconductors, molecular crystals, and rare gas solids. BW-s2 achieves high accuracy for cohesive energies, lattice constants, and bulk moduli in metals, semiconductors, and molecular crystals, rivaling or surpassing coupled-cluster with singles and doubles at lower cost. In rare gas solids, where MP2 already underbinds, κ-MP2 does not make the results much worse while BW-s2 struggles. These results illustrate both the potential and the limitations of regularized perturbation theory for efficient and accurate solid-state simulations.",
+      "keywords": ["perturbation theory", "ab initio simulations", "solid-state physics", "Moller-Plesset", "Brillouin-Wigner"],
+      "date_modified": "2025-08-21",
+      "pdf_url": "https://arxiv.org/pdf/2508.15744"
+    },
+    {
+      "id": "2508.15064",
+      "title": "Quasi-homological dimensions with respect to semidualizing modules",
+      "authors": ["Souvik Dey", "Luigi Ferraro", "Mohsen Gheibi"],
+      "abstract": "Gheibi, Jorgensen and Takahashi recently introduced the quasi-projective dimension of a module over commutative Noetherian rings, a homological invariant extending the classic projective dimension of a module, and Gheibi later developed the dual notion of quasi-injective dimension. Takahashi and White in 2010 introduced the projective and injective dimension of a module with respect to a semidualizing module, which likewise generalize their classic counterparts. In this paper we unify and extend these theories by defining and studying the quasi-projective and quasi-injective dimension of a module with respect to a semidualizing module. We establish several results generalizing classic formulae such as the Auslander-Buchsbaum formula, Bass' formula, Ischebeck's formula, Auslander's depth formula and Jorgensen's dependency formula. Furthermore, we prove a special case of the Auslander-Reiten conjecture and investigate rigidity properties of Ext and Tor.",
+      "keywords": ["homological dimensions", "semidualizing modules", "commutative algebra", "projective dimension", "injective dimension"],
+      "date_modified": "2025-08-20",
+      "pdf_url": "https://arxiv.org/pdf/2508.15064"
+    },
+    {
+      "id": "2508.15774",
+      "title": "CineScale: Free Lunch in High-Resolution Cinematic Visual Generation",
+      "authors": ["Haonan Qiu", "Ning Yu", "Ziqi Huang", "Paul Debevec", "Ziwei Liu"],
+      "abstract": "Visual diffusion models achieve remarkable progress, yet they are typically trained at limited resolutions due to the lack of high-resolution data and constrained computation resources, hampering their ability to generate high-fidelity images or videos at higher resolutions. Recent efforts have explored tuning-free strategies to exhibit the untapped potential higher-resolution visual generation of pre-trained models. However, these methods are still prone to producing low-quality visual content with repetitive patterns. The key obstacle lies in the inevitable increase in high-frequency information when the model generates visual content exceeding its training resolution, leading to undesirable repetitive patterns deriving from the accumulated errors. In this work, we propose CineScale, a novel inference paradigm to enable higher-resolution visual generation. To tackle the various issues introduced by the two types of video generation architectures, we propose dedicated variants tailored to each. Unlike existing baseline methods that are confined to high-resolution T2I and T2V generation, CineScale broadens the scope by enabling high-resolution I2V and V2V synthesis, built atop state-of-the-art open-source video generation frameworks. Extensive experiments validate the superiority of our paradigm in extending the capabilities of higher-resolution visual generation for both image and video models. Remarkably, our approach enables 8k image generation without any fine-tuning, and achieves 4k video generation with only minimal LoRA fine-tuning.",
+      "keywords": ["visual generation", "diffusion models", "high-resolution", "video synthesis", "CineScale"],
+      "date_modified": "2025-08-21",
+      "pdf_url": "https://arxiv.org/pdf/2508.15774"
+    },
+    {
+      "id": "2303.18223",
+      "title": "A Survey of Large Language Models",
+      "authors": ["Wayne Xin Zhao", "Kun Zhou", "Junyi Li", "Tianyi Tang", "Xiaolei Wang", "Yupeng Hou", "Yingqian Min", "Beichen Zhang", "Junjie Zhang", "Zican Dong", "Yifan Du", "Chen Yang", "Yushuo Chen", "Zhipeng Chen", "Jinhao Jiang", "Ruiyang Ren", "Yifan Li", "Xinyu Tang", "Zikang Liu", "Peiyu Liu", "Jian-Yun Nie", "Ji-Rong Wen"],
+      "abstract": "Language is essentially a complex, intricate system of human expressions governed by grammatical rules. It poses a significant challenge to develop capable AI algorithms for comprehending and grasping a language. As a major approach, language modeling has been widely studied for language understanding and generation in the past two decades, evolving from statistical language models to neural language models. Recently, pre-trained language models (PLMs) have been proposed by pre-training Transformer models over large-scale corpora, showing strong capabilities in solving various NLP tasks. Since researchers have found that model scaling can lead to performance improvement, they further study the scaling effect by increasing the model size to an even larger size. Interestingly, when the parameter scale exceeds a certain level, these enlarged language models not only achieve a significant performance improvement but also show some special abilities that are not present in small-scale language models. To discriminate the difference in parameter scale, the research community has coined the term large language models (LLM) for the PLMs of significant size. Recently, the research on LLMs has been largely advanced by both academia and industry, and a remarkable progress is the launch of ChatGPT, which has attracted widespread attention from society. The technical evolution of LLMs has been making an important impact on the entire AI community, which would revolutionize the way how we develop and use AI algorithms. In this survey, we review the recent advances of LLMs by introducing the background, key findings, and mainstream techniques. In particular, we focus on four major aspects of LLMs, namely pre-training, adaptation tuning, utilization, and capacity evaluation. Besides, we also summarize the available resources for developing LLMs and discuss the remaining issues for future directions.",
+      "keywords": ["large language models", "pre-trained models", "Transformer models", "natural language processing", "AI algorithms"],
+      "date_modified": "2025-03-11",
+      "pdf_url": "https://arxiv.org/pdf/2303.18223"
+    },
+    {
+      "id": "2508.15134",
+      "title": "Disentangling the Origins of the NANOGrav Signal: Early Universe Models and ΔN_eff Bounds",
+      "authors": ["Ido Ben-Dayan", "Utkarsh Kumar", "Amresh Verma"],
+      "abstract": "We investigate whether an Early-Universe stochastic gravitational-wave background (SGWB) can account for the common spectrum process reported by NANOGrav, while also being consistent with current and projected CMB measurements of extra radiation. We compute the contribution of effective number of relativistic species, ΔN_eff, for a number of Early-Universe models proposed to explain the pulsar timing array (PTA) spectrum. We demonstrate that models predicting ΔN_eff above the CMB limit would be firmly excluded, implying that the NANOGrav signal in tension with these bounds must instead arise from astrophysical sources. We find that current NANOGrav 15-year dataset, sensitive up to 60 nHz, gives a negligible contribution to ΔN_eff and remains well below the present and future CMB detection threshold. However, when we project future PTA capabilities reaching upto 1 μHz, even with our conservative estimate we find that Inflation, Scalar Induced Gravitational Waves (SIGW), and metastable cosmic strings can induce a ΔN_eff large enough for >3.5σ detection by the Simons Observatory.",
+      "keywords": ["gravitational waves", "NANOGrav", "early universe", "ΔN_eff", "cosmic strings"],
+      "date_modified": "2025-08-21",
+      "pdf_url": "https://arxiv.org/pdf/2508.15134"
     }
   ]
 }
