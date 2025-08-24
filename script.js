@@ -194,14 +194,14 @@ function createPaperCard(paper) {
             </div>
             <div class="paper-content">
                 <div class="paper-abstract">
-                    <div class="abstract-preview">
+                    <div class="abstract-preview" data-card-id="${paper.id}">
                         ${escapeHtml(previewText)}${hasMore ? '...' : ''}
                     </div>
                     ${hasMore ? `
-                        <div class="abstract-full" style="display: none;">
+                        <div class="abstract-full" data-card-id="${paper.id}" style="display: none;">
                             ${escapeHtml(paper.abstract)}
                         </div>
-                        <button class="expand-btn">Read full abstract</button>
+                        <button class="expand-btn" data-card-id="${paper.id}">Read full abstract</button>
                     ` : ''}
                 </div>
                 <div class="paper-actions">
@@ -215,20 +215,25 @@ function createPaperCard(paper) {
     `;
 }
 
-// Toggle abstract expansion
+// Toggle abstract expansion - Use data attributes for precise targeting
 function toggleAbstract(e) {
     e.preventDefault();
     e.stopPropagation();
     
     const button = e.target;
-    const card = button.closest('.paper-card');
+    const cardId = button.getAttribute('data-card-id');
     
-    // Make sure we're only selecting elements within THIS specific card
-    const preview = card.querySelector('.abstract-preview');
-    const full = card.querySelector('.abstract-full');
+    if (!cardId) {
+        console.error('No card ID found on button');
+        return;
+    }
+    
+    // Use the card ID to find the specific elements, avoiding any closest() issues
+    const preview = document.querySelector(`.abstract-preview[data-card-id="${cardId}"]`);
+    const full = document.querySelector(`.abstract-full[data-card-id="${cardId}"]`);
     
     if (!preview || !full) {
-        console.error('Could not find preview or full abstract elements');
+        console.error('Could not find preview or full abstract elements for card:', cardId);
         return;
     }
     
