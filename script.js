@@ -259,25 +259,28 @@ function performSearch() {
 }
 
 // Sort papers
-function sortPapers() {
-    const sortBy = sortSelect.value;
-    
+function sortPapers(sortBy = sortSelect.value) {
     filteredPapers.sort((a, b) => {
-        switch (sortBy) {
+        switch(sortBy) {
             case 'date-desc':
-                return new Date(b.date_modified) - new Date(a.date_modified);
+                return parseDate(b.date_modified) - parseDate(a.date_modified);
             case 'date-asc':
-                return new Date(a.date_modified) - new Date(b.date_modified);
+                return parseDate(a.date_modified) - parseDate(b.date_modified);
             case 'title-asc':
-                return a.title.localeCompare(b.title);
+                return a.title.localeCompare(b.title, undefined, { numeric: true, sensitivity: 'base' });
             case 'title-desc':
-                return b.title.localeCompare(a.title);
+                return b.title.localeCompare(a.title, undefined, { numeric: true, sensitivity: 'base' });
             default:
                 return 0;
         }
     });
-    
     renderPapers();
+}
+
+// Add parseDate helper
+function parseDate(dateStr) {
+    const [year, month, day] = dateStr.split('-').map(Number);
+    return new Date(year, month - 1, day);
 }
 
 // Reset all filters
