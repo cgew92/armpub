@@ -217,6 +217,9 @@ function createPaperCard(paper) {
 
 // Toggle abstract expansion - Use data attributes for precise targeting
 function toggleAbstract(e) {
+
+    console.log("toggled");
+    
     e.preventDefault();
     e.stopPropagation();
     
