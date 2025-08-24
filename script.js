@@ -95,11 +95,13 @@ async function loadPapers() {
         allPapers = data.papers || [];
         
         // Process PDF URLs based on configuration
-        allPapers = allPapers.map(paper => ({
+        allPapers = data.papers.map((paper, index) => ({
             ...paper,
-            pdf_url: processPdfUrl(paper.pdf_url)
+            pdf_url: processPdfUrl(paper.pdf_url),
+            _initialIndex: index,
+            _timestamp: new Date(paper.date_modified).getTime()
         }));
-        
+
         filteredPapers = [...allPapers];
         
         renderPapers();
@@ -259,42 +261,40 @@ function performSearch() {
 }
 
 // Sort papers
-function sortPapers() {
-    const sortBy = sortSelect.value;
-
-    filteredPapers.sort((a, b) => {
-        switch (sortBy) {
-            case 'date-desc': {
-                const dateA = new Date(a.date_modified);
-                const dateB = new Date(b.date_modified);
-                if (isNaN(dateA)) return 1;
-                if (isNaN(dateB)) return -1;
-                return dateB - dateA;
-            }
-            case 'date-asc': {
-                const dateA = new Date(a.date_modified);
-                const dateB = new Date(b.date_modified);
-                if (isNaN(dateA)) return 1;
-                if (isNaN(dateB)) return -1;
-                return dateA - dateB;
-            }
-            case 'title-asc': {
-                const titleA = (a.title || '').trim();
-                const titleB = (b.title || '').trim();
-                return titleA.localeCompare(titleB, undefined, { numeric: true, sensitivity: 'base' });
-            }
-            case 'title-desc': {
-                const titleA = (a.title || '').trim();
-                const titleB = (b.title || '').trim();
-                return titleB.localeCompare(titleA, undefined, { numeric: true, sensitivity: 'base' });
-            }
-            default:
-                return 0;
+filteredPapers.sort((a, b) => {
+    switch (sortBy) {
+        case 'date-desc': {
+            const dateA = new Date(a.date_modified);
+            const dateB = new Date(b.date_modified);
+            if (isNaN(dateA)) return 1;
+            if (isNaN(dateB)) return -1;
+            const diff = b._timestamp - a._timestamp;
+            return diff !== 0 ? diff : a._initialIndex - b._initialIndex;
         }
-    });
-
-    renderPapers();
-}
+        case 'date-asc': {
+            const dateA = new Date(a.date_modified);
+            const dateB = new Date(b.date_modified);
+            if (isNaN(dateA)) return 1;
+            if (isNaN(dateB)) return -1;
+            const diff = b._timestamp - a._timestamp;
+            return diff !== 0 ? diff : a._initialIndex - b._initialIndex;
+        }
+        case 'title-asc': {
+            const titleA = (a.title || '').trim();
+            const titleB = (b.title || '').trim();
+            const cmp = titleA.localeCompare(titleB, undefined, { numeric: true, sensitivity: 'base' });
+            return cmp !== 0 ? cmp : a._initialIndex - b._initialIndex;
+        }
+        case 'title-desc': {
+            const titleA = (a.title || '').trim();
+            const titleB = (b.title || '').trim();
+            const cmp = titleB.localeCompare(titleA, undefined, { numeric: true, sensitivity: 'base' });
+            return cmp !== 0 ? cmp : a._initialIndex - b._initialIndex;
+        }
+        default:
+            return a._initialIndex - b._initialIndex;
+    }
+});
 
 // Reset all filters
 function resetFilters() {
