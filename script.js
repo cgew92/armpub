@@ -259,7 +259,9 @@ function performSearch() {
 }
 
 // Sort papers
-function sortPapers(sortBy = sortSelect.value) {
+function sortPapers() {
+    const sortBy = sortSelect.value;
+    
     filteredPapers.sort((a, b) => {
         switch (sortBy) {
             case 'date-desc':
@@ -267,13 +269,14 @@ function sortPapers(sortBy = sortSelect.value) {
             case 'date-asc':
                 return new Date(a.date_modified) - new Date(b.date_modified);
             case 'title-asc':
-                return (a.title || '').localeCompare(b.title || '', undefined, { numeric: true, sensitivity: 'base' });
+                return a.title.localeCompare(b.title);
             case 'title-desc':
-                return (b.title || '').localeCompare(a.title || '', undefined, { numeric: true, sensitivity: 'base' });
+                return b.title.localeCompare(a.title);
             default:
                 return 0;
         }
     });
+    
     renderPapers();
 }
 
