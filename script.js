@@ -167,8 +167,8 @@ function renderPapers() {
     
     papersGrid.innerHTML = filteredPapers.map(paper => createPaperCard(paper)).join('');
     
-    // Add event listeners for expand buttons
-    document.querySelectorAll('.expand-btn').forEach(btn => {
+    // Add event listeners for expand buttons - be more specific with the selector
+    papersGrid.querySelectorAll('.expand-btn').forEach(btn => {
         btn.addEventListener('click', toggleAbstract);
     });
 }
@@ -217,16 +217,30 @@ function createPaperCard(paper) {
 
 // Toggle abstract expansion
 function toggleAbstract(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
     const button = e.target;
     const card = button.closest('.paper-card');
+    
+    // Make sure we're only selecting elements within THIS specific card
     const preview = card.querySelector('.abstract-preview');
     const full = card.querySelector('.abstract-full');
     
-    if (full.style.display === 'block') {
+    if (!preview || !full) {
+        console.error('Could not find preview or full abstract elements');
+        return;
+    }
+    
+    const isCurrentlyExpanded = full.style.display === 'block';
+    
+    if (isCurrentlyExpanded) {
+        // Collapse
         full.style.display = 'none';
         preview.style.display = 'block';
         button.textContent = 'Read full abstract';
     } else {
+        // Expand  
         full.style.display = 'block';
         preview.style.display = 'none';
         button.textContent = 'Show less';
