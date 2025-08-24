@@ -106,6 +106,7 @@ async function loadPapers() {
 
         sortSelect.value = 'date-desc'; // ensure UI matches the actual sort
         
+        sortPapers();
         renderPapers();
         updateStats();
         
