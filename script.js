@@ -103,6 +103,7 @@ async function loadPapers() {
         }));
 
         filteredPapers = [...allPapers];
+
         sortSelect.value = 'date-desc'; // ensure UI matches the actual sort
         
         renderPapers();
