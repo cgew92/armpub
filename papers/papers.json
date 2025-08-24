@@ -1,9 +1,13 @@
 {
-  "id": "unique-id",
-  "title": "Paper Title",
-  "authors": ["Author One", "Author Two"],
-  "abstract": "Abstract text here...",
-  "keywords": ["keyword1", "keyword2"],
-  "date_modified": "2025-08-24",
-  "pdf_url": "https://arxiv.org/pdf/1706.03762"
+  "papers": [
+    {
+      "id": "unique-id",
+      "title": "Paper Title",
+      "authors": ["Author One", "Author Two"],
+      "abstract": "Abstract text here...",
+      "keywords": ["keyword1", "keyword2"],
+      "date_modified": "2025-08-24",
+      "pdf_url": "https://arxiv.org/pdf/1706.03762"
+    }
+  ]
 }
