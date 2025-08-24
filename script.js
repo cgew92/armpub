@@ -261,22 +261,38 @@ function performSearch() {
 // Sort papers
 function sortPapers() {
     const sortBy = sortSelect.value;
-    
+
     filteredPapers.sort((a, b) => {
         switch (sortBy) {
-            case 'date-desc':
-                return new Date(b.date_modified) - new Date(a.date_modified);
-            case 'date-asc':
-                return new Date(a.date_modified) - new Date(b.date_modified);
-            case 'title-asc':
-                return a.title.localeCompare(b.title);
-            case 'title-desc':
-                return b.title.localeCompare(a.title);
+            case 'date-desc': {
+                const dateA = new Date(a.date_modified);
+                const dateB = new Date(b.date_modified);
+                if (isNaN(dateA)) return 1;
+                if (isNaN(dateB)) return -1;
+                return dateB - dateA;
+            }
+            case 'date-asc': {
+                const dateA = new Date(a.date_modified);
+                const dateB = new Date(b.date_modified);
+                if (isNaN(dateA)) return 1;
+                if (isNaN(dateB)) return -1;
+                return dateA - dateB;
+            }
+            case 'title-asc': {
+                const titleA = (a.title || '').trim();
+                const titleB = (b.title || '').trim();
+                return titleA.localeCompare(titleB, undefined, { numeric: true, sensitivity: 'base' });
+            }
+            case 'title-desc': {
+                const titleA = (a.title || '').trim();
+                const titleB = (b.title || '').trim();
+                return titleB.localeCompare(titleA, undefined, { numeric: true, sensitivity: 'base' });
+            }
             default:
                 return 0;
         }
     });
-    
+
     renderPapers();
 }
 
