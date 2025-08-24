@@ -226,7 +226,7 @@ function toggleAbstract(e) {
     const button = e.target;
     const cardId = button.getAttribute('data-card-id');
     console.log(e.target);
-    console.log(cardId;)
+    console.log(cardId);
     
     if (!cardId) {
         console.error('No card ID found on button');
