@@ -219,12 +219,14 @@ function createPaperCard(paper) {
 function toggleAbstract(e) {
 
     console.log("toggled");
-    
+
     e.preventDefault();
     e.stopPropagation();
     
     const button = e.target;
     const cardId = button.getAttribute('data-card-id');
+    console.log(e.target);
+    console.log(cardId;)
     
     if (!cardId) {
         console.error('No card ID found on button');
