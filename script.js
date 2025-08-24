@@ -381,7 +381,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const feedback = document.getElementById('feedback');
 
     // Replace this with your real editorial inbox
-    const RECIPIENT_EMAIL = 'submissions@yourdomain.com';
+    const RECIPIENT_EMAIL = 'jamesche3.14@gmail.com';
 
     function parseAuthors(raw) {
         if (!raw) return [];
