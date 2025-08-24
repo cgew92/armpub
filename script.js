@@ -198,7 +198,7 @@ function createPaperCard(paper) {
                         ${escapeHtml(previewText)}${hasMore ? '...' : ''}
                     </div>
                     ${hasMore ? `
-                        <div class="abstract-full">
+                        <div class="abstract-full" style="display: none;">
                             ${escapeHtml(paper.abstract)}
                         </div>
                         <button class="expand-btn">Read full abstract</button>
