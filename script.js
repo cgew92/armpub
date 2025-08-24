@@ -261,7 +261,10 @@ function performSearch() {
 }
 
 // Sort papers
-filteredPapers.sort((a, b) => {
+function sortPapers() {
+    const sortBy = sortSelect.value;
+
+    filteredPapers.sort((a, b) => {
     switch (sortBy) {
         case 'date-desc': {
             const dateA = new Date(a.date_modified);
@@ -293,8 +296,11 @@ filteredPapers.sort((a, b) => {
         }
         default:
             return a._initialIndex - b._initialIndex;
-    }
-});
+        }
+    });
+
+    renderPapers();
+}
 
 // Reset all filters
 function resetFilters() {
