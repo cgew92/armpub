@@ -7,8 +7,8 @@ const CONFIG = {
     pdfBaseUrl: './papers/',
     // Alternative: you can set these to GitHub raw URLs for reliability
     useGitHubRaw: false, // Set to true to fetch directly from GitHub
-    githubUser: 'your-username',
-    githubRepo: 'your-repo',
+    githubUser: 'cgew92',
+    githubRepo: 'armpub',
     githubBranch: 'main'
 };
 
