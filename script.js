@@ -184,7 +184,10 @@ function createPaperCard(paper) {
                 <span class="pub-date">Last modified: ${formattedDate}</span>
             </div>
             <div class="pub-abstract-wrapper">
-                <p class="pub-abstract collapsed">${escapeHtml(paper.abstract)}</p>
+                <p class="pub-abstract collapsed">
+                    ${escapeHtml(paper.abstract)}
+                    <span class="pub-ellipsis">…</span>
+                </p>
                 <button class="pub-toggle">Expand abstract ↓</button>
             </div>
             <div class="pub-actions">
@@ -199,13 +202,19 @@ function createPaperCard(paper) {
 document.addEventListener("click", function(e) {
     if (e.target.classList.contains("pub-toggle")) {
         const abstract = e.target.previousElementSibling;
+        const ellipsis = abstract.querySelector(".pub-ellipsis");
         const isCollapsed = abstract.classList.toggle("collapsed");
 
-        e.target.textContent = isCollapsed 
-            ? "Expand abstract ↓" 
-            : "Collapse abstract ↑";
+        if (isCollapsed) {
+            e.target.textContent = "Expand abstract ↓";
+            ellipsis.style.display = "inline";
+        } else {
+            e.target.textContent = "Collapse abstract ↑";
+            ellipsis.style.display = "none";
+        }
     }
 });
+
 
 
 // Toggle abstract expansion - Use data attributes for precise targeting
