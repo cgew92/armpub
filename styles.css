@@ -794,3 +794,9 @@ footer a:hover {
     font-size: 50px;
     margin: 20px;
 }
+
+#titleblue {
+    font-size: 50px;
+    margin: 20px;
+    color: var(--primary-color);
+}
