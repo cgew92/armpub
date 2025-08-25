@@ -192,7 +192,7 @@ function createPaperCard(paper) {
             </div>
             <div class="pub-actions">
                 <a href="${paper.pdf_url}" class="pub-download" target="_blank">
-                    <svg class="feather"> <use href="https://raw.githubusercontent.com/feathericons/feather/refs/heads/main/icons/arrow-down.svg" /> </svg> Download PDF
+                    <i data-feather="circle"></i> Download PDF
                 </a>
             </div>
         </div>
