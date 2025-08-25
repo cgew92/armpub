@@ -789,3 +789,8 @@ footer a:hover {
     height: 15px;
     width: 15px;
 }
+
+#rp {
+    font-size: 50px;
+    margin: 20px;
+}
