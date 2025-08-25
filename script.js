@@ -182,22 +182,21 @@ function createPaperCard(paper) {
     const formattedDate = formatDate(paper.date_modified);
 
     return `
-        <div class="paper-row">
-            <h1 class="paper-title">${escapeHtml(paper.title)}</h1>
-            <div class="paper-meta">
-                <span class="paper-authors">By: ${escapeHtml(authorsText)}</span> • 
-                <span class="paper-date">Last modified: ${formattedDate}</span>
+        <div class="pub-item">
+            <h1 class="pub-title">${escapeHtml(paper.title)}</h1>
+            <div class="pub-meta">
+                <span class="pub-authors">By ${escapeHtml(authorsText)}</span> • 
+                <span class="pub-date">Last modified: ${formattedDate}</span>
             </div>
-            <p class="paper-abstract">${escapeHtml(paper.abstract)}</p>
-            <div class="paper-actions">
-                <a href="${paper.pdf_url}" class="download-btn" target="_blank">
+            <p class="pub-abstract">${escapeHtml(paper.abstract)}</p>
+            <div class="pub-actions">
+                <a href="${paper.pdf_url}" class="pub-download" target="_blank">
                     <i data-feather="download"></i> Download PDF
                 </a>
             </div>
         </div>
     `;
 }
-
 
 // Toggle abstract expansion - Use data attributes for precise targeting
 // Simplified toggle function - replace your existing toggleAbstract function
