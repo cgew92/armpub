@@ -191,9 +191,9 @@ function createPaperCard(paper) {
                 <button class="pub-toggle">Expand abstract</button>
             </div>
             <div class="pub-actions">
-                <button class="pub-download" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg> Download PDF
-                </button>
+                <a href="${paper.pdf_url}" class="pub-download" target="_blank">
+                    Download PDF
+                </a>
             </div>
         </div>
     `;
