@@ -250,11 +250,12 @@ main {
     background: var(--secondary-color);
 }
 
-/* Papers Grid */
+/* Replace the existing .papers-grid rule with this */
 .papers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
+    justify-content: flex-start;
 }
 
 .paper-card {
@@ -263,6 +264,10 @@ main {
     box-shadow: var(--shadow);
     overflow: hidden;
     transition: var(--transition);
+    width: calc(50% - 1rem); /* Two cards per row with gap */
+    max-width: 500px;
+    min-width: 350px;
+    flex-shrink: 0;
 }
 
 .paper-card:hover {
@@ -588,6 +593,10 @@ footer a:hover {
     nav li {
         margin: 0.25rem 0.5rem;
     }
+    .paper-card {
+        width: 100%;
+        min-width: auto;
+    }
 }
 
 @media (max-width: 480px) {
@@ -598,6 +607,9 @@ footer a:hover {
     .submit-btn {
         width: 100%;
         justify-content: center;
+    }
+    .paper-card {
+        width: calc(33.333% - 1.333rem);
     }
 }
 

@@ -216,6 +216,7 @@ function createPaperCard(paper) {
 }
 
 // Toggle abstract expansion - Use data attributes for precise targeting
+// Simplified toggle function - replace your existing toggleAbstract function
 function toggleAbstract(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -223,35 +224,37 @@ function toggleAbstract(e) {
     const button = e.target;
     const cardId = button.getAttribute('data-card-id');
     
-    console.log('Button clicked:', button);
-    console.log('Card ID:', cardId);
+    console.log('Toggling card:', cardId);
     
-    // Also try the closest method to see what it finds
-    const cardViaClosest = button.closest('.paper-card');
-    console.log('Card via closest:', cardViaClosest);
-    console.log('Card ID via closest:', cardViaClosest?.getAttribute('data-id'));
+    if (!cardId) {
+        console.error('No card ID found');
+        return;
+    }
     
-    // Use the card ID to find the specific elements
-    const preview = document.querySelector(`.abstract-preview[data-card-id="${cardId}"]`);
-    const full = document.querySelector(`.abstract-full[data-card-id="${cardId}"]`);
+    // Find elements by data-card-id to ensure we get the right ones
+    const preview = document.querySelector(`[data-card-id="${cardId}"].abstract-preview`);
+    const full = document.querySelector(`[data-card-id="${cardId}"].abstract-full`);
     
-    console.log('Preview element:', preview);
-    console.log('Full element:', full);
+    console.log('Preview:', preview);
+    console.log('Full:', full);
     
     if (!preview || !full) {
         console.error('Could not find elements for card:', cardId);
         return;
     }
     
-    const isCurrentlyExpanded = full.style.display === 'block';
-    console.log('Currently expanded:', isCurrentlyExpanded);
+    // Check current state
+    const isExpanded = full.style.display === 'block';
+    console.log('Is expanded:', isExpanded);
     
-    if (isCurrentlyExpanded) {
+    if (isExpanded) {
+        // Collapse
         full.style.display = 'none';
         preview.style.display = 'block';
         button.textContent = 'Read full abstract';
         console.log('Collapsed card:', cardId);
     } else {
+        // Expand
         full.style.display = 'block';
         preview.style.display = 'none';
         button.textContent = 'Show less';
