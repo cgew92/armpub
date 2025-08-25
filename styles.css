@@ -794,10 +794,12 @@ footer a:hover {
     font-size: 50px;
     margin: 20px;
     margin-left: 0;
+    line-height: 1em;
 }
 
 #titleblue {
     font-size: 50px;
     margin: 20px;
     color: var(--primary-color);
+    line-height: 1em;
 }
