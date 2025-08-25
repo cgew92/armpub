@@ -251,6 +251,7 @@ main {
 }
 
 /* Replace the existing .papers-grid rule with this */
+
 .papers-grid {
     display: flex;
     flex-wrap: wrap;
@@ -264,12 +265,10 @@ main {
     box-shadow: var(--shadow);
     overflow: hidden;
     transition: var(--transition);
-    width: calc(50% - 1rem); /* Two cards per row with gap */
+    flex: 1 1 300px; /* Flex-grow, flex-shrink, flex-basis */
     max-width: 500px;
-    min-width: 350px;
-    flex-shrink: 0;
+    min-width: 200px;
 }
-
 .paper-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
