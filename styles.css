@@ -780,4 +780,6 @@ footer a:hover {
 
 #download {
     color: white;
+    height: 15px;
+    width: 15px;
 }
