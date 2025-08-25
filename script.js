@@ -188,11 +188,11 @@ function createPaperCard(paper) {
                     ${escapeHtml(paper.abstract)}
                     <span class="pub-ellipsis">…</span>
                 </p>
-                <button class="pub-toggle">Expand abstract ↓</button>
+                <button class="pub-toggle">Expand abstract</button>
             </div>
             <div class="pub-actions">
                 <a href="${paper.pdf_url}" class="pub-download" target="_blank">
-                    <i id="download" data-feather="download"></i> Download PDF
+                    <i style="color: "white""data-feather="download"></i> Download PDF
                 </a>
             </div>
         </div>
