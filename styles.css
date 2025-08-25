@@ -251,12 +251,12 @@ main {
 }
 
 /* Replace the existing .papers-grid rule with this */
-
 .papers-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .paper-card {
@@ -265,10 +265,13 @@ main {
     box-shadow: var(--shadow);
     overflow: hidden;
     transition: var(--transition);
-    flex: 1 1 300px; /* Flex-grow, flex-shrink, flex-basis */
-    max-width: 500px;
+    width: 250px;
+    max-width: 600px;
     min-width: 200px;
+    flex-shrink: 0;
+    flex-grow: 1;
 }
+
 .paper-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
