@@ -778,3 +778,6 @@ footer a:hover {
     transform: translateY(-1px);
 }
 
+#download {
+    color: white;
+}
