@@ -192,7 +192,7 @@ function createPaperCard(paper) {
             </div>
             <div class="pub-actions">
                 <a href="${paper.pdf_url}" class="pub-download" target="_blank">
-                    <i style="color: "white"" data-feather="download"></i> Download PDF
+                    <i style="color: white" data-feather="download"></i> Download PDF
                 </a>
             </div>
         </div>
