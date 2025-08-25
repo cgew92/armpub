@@ -166,11 +166,6 @@ function renderPapers() {
     noResults.style.display = 'none';
     
     papersGrid.innerHTML = filteredPapers.map(paper => createPaperCard(paper)).join('');
-    
-    // Add event listeners for expand buttons - be more specific with the selector
-    papersGrid.querySelectorAll('.expand-btn').forEach(btn => {
-        btn.addEventListener('click', toggleAbstract);
-    });
 }
 
 // Create individual paper card HTML
@@ -188,7 +183,10 @@ function createPaperCard(paper) {
                 <span class="pub-authors">By ${escapeHtml(authorsText)}</span> • 
                 <span class="pub-date">Last modified: ${formattedDate}</span>
             </div>
-            <p class="pub-abstract">${escapeHtml(paper.abstract)}</p>
+            <div class="pub-abstract-wrapper">
+                <p class="pub-abstract collapsed">${escapeHtml(paper.abstract)}</p>
+                <button class="pub-toggle">Expand abstract ↓</button>
+            </div>
             <div class="pub-actions">
                 <a href="${paper.pdf_url}" class="pub-download" target="_blank">
                     <i data-feather="download"></i> Download PDF
@@ -197,6 +195,18 @@ function createPaperCard(paper) {
         </div>
     `;
 }
+
+document.addEventListener("click", function(e) {
+    if (e.target.classList.contains("pub-toggle")) {
+        const abstract = e.target.previousElementSibling;
+        const isCollapsed = abstract.classList.toggle("collapsed");
+
+        e.target.textContent = isCollapsed 
+            ? "Expand abstract ↓" 
+            : "Collapse abstract ↑";
+    }
+});
+
 
 // Toggle abstract expansion - Use data attributes for precise targeting
 // Simplified toggle function - replace your existing toggleAbstract function

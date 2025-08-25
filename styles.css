@@ -700,13 +700,6 @@ footer a:hover {
     margin-bottom: 1.2rem;
 }
 
-.pub-abstract {
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-    color: var(--text-color);
-}
-
 .pub-actions {
     display: flex;
     justify-content: flex-end;
@@ -733,4 +726,38 @@ footer a:hover {
 .pub-download svg {
     width: 18px;
     height: 18px;
+}
+
+/* Abstract collapse behavior */
+.pub-abstract {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    max-height: none;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.pub-abstract.collapsed {
+    max-height: 6em; /* ~4 lines depending on line-height */
+    overflow: hidden;
+}
+
+/* Expand/Collapse button */
+.pub-toggle {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.pub-toggle:hover {
+    background: #005bb5; /* darker primary */
+    transform: translateY(-1px);
 }
