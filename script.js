@@ -199,7 +199,7 @@ function createPaperCard(paper) {
     `;
 }
 
-feather.replace() 
+feather.replace();
 
 document.addEventListener("click", function(e) {
     if (e.target.classList.contains("pub-toggle")) {
