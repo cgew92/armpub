@@ -718,6 +718,11 @@ footer a:hover {
     font-weight: 500;
 }
 
+.pub-download i {
+    background: white;
+    color: white;
+}
+
 .pub-download:hover {
     background: #219a52;
     transform: translateY(-2px);
