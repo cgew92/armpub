@@ -600,3 +600,70 @@ footer a:hover {
         justify-content: center;
     }
 }
+
+/* Kill the grid layout */
+.papers-grid {
+    display: block;
+}
+
+/* Each paper is now a row */
+.paper-row {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: var(--transition);
+}
+
+.paper-row:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.paper-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.paper-meta {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.paper-abstract {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+/* Download button bottom-right */
+.paper-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.download-btn {
+    background: var(--success-color);
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.download-btn:hover {
+    background: #219a52;
+    transform: translateY(-2px);
+}
+
+.download-btn svg {
+    width: 18px;
+    height: 18px;
+}

@@ -175,45 +175,29 @@ function renderPapers() {
 
 // Create individual paper card HTML
 function createPaperCard(paper) {
-    const abstractWords = paper.abstract.split(' ');
-    const previewText = abstractWords.slice(0, 50).join(' ');
-    const hasMore = abstractWords.length > 50;
-    
     const authorsText = Array.isArray(paper.authors) 
         ? paper.authors.join(', ') 
         : paper.authors;
-    
+
     const formattedDate = formatDate(paper.date_modified);
-    
+
     return `
-        <div class="paper-card" data-id="${paper.id}">
-            <div class="paper-header">
-                <h3 class="paper-title">${escapeHtml(paper.title)}</h3>
-                <div class="paper-authors">By: ${escapeHtml(authorsText)}</div>
-                <div class="paper-date">Last modified: ${formattedDate}</div>
+        <div class="paper-row">
+            <h1 class="paper-title">${escapeHtml(paper.title)}</h1>
+            <div class="paper-meta">
+                <span class="paper-authors">By: ${escapeHtml(authorsText)}</span> • 
+                <span class="paper-date">Last modified: ${formattedDate}</span>
             </div>
-            <div class="paper-content">
-                <div class="paper-abstract">
-                    <div class="abstract-preview" data-card-id="${paper.id}">
-                        ${escapeHtml(previewText)}${hasMore ? '...' : ''}
-                    </div>
-                    ${hasMore ? `
-                        <div class="abstract-full" data-card-id="${paper.id}" style="display: none;">
-                            ${escapeHtml(paper.abstract)}
-                        </div>
-                        <button class="expand-btn" data-card-id="${paper.id}">Read full abstract</button>
-                    ` : ''}
-                </div>
-                <div class="paper-actions">
-                    <a href="${paper.pdf_url}" class="pdf-link" target="_blank">
-                        <i class="fas fa-file-pdf"></i>
-                        View PDF
-                    </a>
-                </div>
+            <p class="paper-abstract">${escapeHtml(paper.abstract)}</p>
+            <div class="paper-actions">
+                <a href="${paper.pdf_url}" class="download-btn" target="_blank">
+                    <i data-feather="download"></i> Download PDF
+                </a>
             </div>
         </div>
     `;
 }
+
 
 // Toggle abstract expansion - Use data attributes for precise targeting
 // Simplified toggle function - replace your existing toggleAbstract function
