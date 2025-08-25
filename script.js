@@ -191,9 +191,9 @@ function createPaperCard(paper) {
                 <button class="pub-toggle">Expand abstract</button>
             </div>
             <div class="pub-actions">
-                <a href="${paper.pdf_url}" class="pub-download" target="_blank">
+                <button class="pub-download" target="_blank">
                     <i data-feather="circle"></i> Download PDF
-                </a>
+                </button>
             </div>
         </div>
     `;
